@@ -18,10 +18,8 @@ struct HistoryScreen: View {
             }
             .padding(.all, 20)
             
-            ScrollView {
-                ForEach(model.historyData, id: \.title) { item in
-                    HistoryCell(data: item)
-                }
+            List(model.historyData, id: \.title) { item in
+                HistoryCell(data: item, color: color(for: item))
             }
             
             Button("Создать историю...") {
@@ -35,12 +33,14 @@ struct HistoryScreen: View {
         }
     }
     
-    func color(for index: Int) -> Color {
-        guard model.minimalIndex != model.maxIndex else { return .white }
+    func color(for item: HistoryData) -> Color {
+        guard item.index != -1 else { return .white }
         
-        if index == model.minimalIndex {
+        if model.minimalIndex == item.index {
             return .green
-        } else if index == model.maxIndex {
+        }
+
+        if model.maximumIndex == item.index {
             return .red
         }
         

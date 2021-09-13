@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryCell: View {
     let data    : HistoryData
+    let color   : Color
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,16 +36,14 @@ struct HistoryCell: View {
                     Text("Время теста:")
                         .bold()
                         .foregroundColor(.gray)
-                    Text(time)
+                    Text(time == 0 ? "Тест не проводился" : String(describing: time))
                         .lineLimit(1)
                     Spacer()
                 }
                 .padding(.leading, 15)
             }
-            
-            Divider()
         }
-        .background(color())
+        .background(color)
     }
     
     private func formattedTitle() -> String {
@@ -53,26 +52,11 @@ struct HistoryCell: View {
         let str = data.title
         return String(str[str.startIndex..<str.index(str.startIndex, offsetBy: 19)]) + "..."
     }
-    
-    private func color() -> Color {
-        if data.isMax {
-            return .red
-        } else if data.isMin {
-            return .green
-        }
-        
-        return .white
-    }
 }
 
 struct HistoryData {
     let title   : String
-    var time    : String = "Тест не проводился" {
-        didSet {
-            isMin = false
-            isMax = false
-        }
-    }
-    var isMin   : Bool      = false
-    var isMax   : Bool      = false
+    
+    var index   : Int            = -1
+    var time    : TimeInterval   = 0
 }

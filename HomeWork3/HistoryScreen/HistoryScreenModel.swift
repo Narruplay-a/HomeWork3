@@ -11,10 +11,11 @@ import Combine
 final class HistoryScreenModel: ObservableObject {
     @Published
     var historyData     : [HistoryData]     = .init()
-    var minimalIndex    : Int               = 0
-    var maxIndex        : Int               = 0
     var service         : JobScheduler<MeasureJob>       = .init()
     var cancellable     : AnyCancellable?
+    
+    var minimalIndex    : Int               = 0
+    var maximumIndex    : Int               = 0
     
     func loadHistoryData() {
         guard let data = UserDefaults.standard.stringArray(forKey: "history_data") else {
@@ -31,6 +32,8 @@ final class HistoryScreenModel: ObservableObject {
     }
     
     func createOrAppendHistoryData() {
+        guard historyData.count == 0 else { return }
+        
         appendHistoryData()
         
         var historyArray: [String] = .init()
@@ -39,6 +42,8 @@ final class HistoryScreenModel: ObservableObject {
     }
 
     func runTest() {
+        guard historyData.count > 0 else { return }
+        
         for item in historyData {
             service.add(task: MeasureJob({
                 var array = SuffixArray(dataSource: item.title)
@@ -50,9 +55,9 @@ final class HistoryScreenModel: ObservableObject {
         
         cancellable = service.completeSubject.sink(receiveValue: { [weak self] tasks in
             guard let self = self else { return }
-            
-            var minimalTime: TimeInterval = 0
-            var maximumTime: TimeInterval = 0
+
+            var minimalTime     : TimeInterval      = 0
+            var maximumTime     : TimeInterval      = 0
             
             for i in 0..<tasks.count {
                 let measureTime = tasks[i].measureTime!
@@ -63,13 +68,12 @@ final class HistoryScreenModel: ObservableObject {
                 
                 if measureTime > maximumTime {
                     maximumTime = measureTime
-                    self.maxIndex = i
+                    self.maximumIndex = i
                 }
-                self.historyData[i].time = String(describing: measureTime)
+                
+                self.historyData[i].time = measureTime
+                self.historyData[i].index = i
             }
-
-            self.historyData[self.minimalIndex].isMin = true
-            self.historyData[self.maxIndex].isMax = true
         })
     }
 }
@@ -87,6 +91,20 @@ let firstString = """
     Цель:
     Научиться внедрять сервис очереди в существующую инфраструктуру приложение, развиваем навык рефакторинга для не-UI кода приложения
     Сделать таб историю шарингов на основе предыдущего таьа
+    Реализовать структуру данных Job Queue
+    Создать сервис Job Scheduler
+    В хедере таблицы экрана Feed сделать возможность запускать один конкретный тест по всем айтемам истории на построение суффиксного массива
+    В ячейку выводить время построение
+    *6. Красить в зеленый лучшее время и в красный худшее, или градацие от зеленого к красному
+    Критерии оценки:
+    Факт сдачи дз - 40 баллов Сдача во время - 10 баллов Работающий Job Scheduler - 20 баллов Возможность запустить один тест на нескольких структурах данных - 20 баллов Вывод в ячейку - 10 баллов
+    Реализовать структуру данных Job Queue
+    Создать сервис Job Scheduler
+    В хедере таблицы экрана Feed сделать возможность запускать один конкретный тест по всем айтемам истории на построение суффиксного массива
+    В ячейку выводить время построение
+    *6. Красить в зеленый лучшее время и в красный худшее, или градацие от зеленого к красному
+    Критерии оценки:
+    Факт сдачи дз - 40 баллов Сдача во время - 10 баллов Работающий Job Scheduler - 20 баллов Возможность запустить один тест на нескольких структурах данных - 20 баллов Вывод в ячейку - 10 баллов
     Реализовать структуру данных Job Queue
     Создать сервис Job Scheduler
     В хедере таблицы экрана Feed сделать возможность запускать один конкретный тест по всем айтемам истории на построение суффиксного массива
