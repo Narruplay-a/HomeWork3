@@ -78,6 +78,4 @@ struct SuffixScreen: View {
             .frame(minHeight: geometry.size.height)
         }
     }
-    
-    
 }

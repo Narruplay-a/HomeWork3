@@ -17,6 +17,14 @@ final class TextInputScreenModel: ObservableObject {
     
     func saveText() {
         UserDefaults.standard.setValue(inputText, forKey: "shared_text")
+        if var historyArray = UserDefaults.standard.stringArray(forKey: "history_data") {
+            historyArray.append(inputText)
+            UserDefaults.standard.set(historyArray, forKey: "history_data")
+        } else {
+            var historyArray: [String] = .init()
+            historyArray.append(inputText)
+            UserDefaults.standard.set(historyArray, forKey: "history_data")
+        }
     }
     
     func clearText() {

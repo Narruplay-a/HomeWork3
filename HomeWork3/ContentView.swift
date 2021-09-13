@@ -23,6 +23,12 @@ struct ContentView: View {
                 .tabItem{
                     Text("Суффикс")
                 }
+            
+            HistoryScreen(model: model.historyScreenModel)
+                .tag(2)
+                .tabItem{
+                    Text("История")
+                }
         }
         .onAppear {
             model.selectScreen()
@@ -42,6 +48,7 @@ struct ContentView: View {
 final class ContentViewModel: ObservableObject {
     let textInputScrennModel = TextInputScreenModel()
     let suffixScreenModel = SuffixScreenModel()
+    let historyScreenModel = HistoryScreenModel()
     
     @Published
     var tabSelection: Int = 0

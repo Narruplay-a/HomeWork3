@@ -27,7 +27,7 @@ struct TextInputScreen: View {
             .padding(.all, 20)
         }
         .onAppear {
-            model.loadText()
+            model.clearText()
         }
     }
 }

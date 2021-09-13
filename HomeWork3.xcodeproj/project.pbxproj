@@ -29,6 +29,13 @@
 		597BC59026CFC42F0035D69B /* WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 597BC58526CFC42E0035D69B /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		597BC59626CFC8FB0035D69B /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597BC59426CFC8BC0035D69B /* DataProvider.swift */; };
 		597BC59826CFCA9F0035D69B /* StringSuffix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5925AB3026CEAAA5002EC18E /* StringSuffix.swift */; };
+		59A44D4026E6137C00D02AC6 /* JobScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D3F26E6137C00D02AC6 /* JobScheduler.swift */; };
+		59A44D4226E6138200D02AC6 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4126E6138200D02AC6 /* Job.swift */; };
+		59A44D4426E6138A00D02AC6 /* JobQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4326E6138A00D02AC6 /* JobQueue.swift */; };
+		59A44D4726E61BAA00D02AC6 /* Profiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4626E61BAA00D02AC6 /* Profiler.swift */; };
+		59A44D4926E620D000D02AC6 /* HistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4826E620D000D02AC6 /* HistoryScreen.swift */; };
+		59A44D4B26E620D900D02AC6 /* HistoryScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4A26E620D900D02AC6 /* HistoryScreenModel.swift */; };
+		59A44D4D26E621E300D02AC6 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A44D4C26E621E300D02AC6 /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +107,13 @@
 		597BC58D26CFC42F0035D69B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		597BC59426CFC8BC0035D69B /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		597BC59926CFCB2B0035D69B /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
+		59A44D3F26E6137C00D02AC6 /* JobScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobScheduler.swift; sourceTree = "<group>"; };
+		59A44D4126E6138200D02AC6 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		59A44D4326E6138A00D02AC6 /* JobQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobQueue.swift; sourceTree = "<group>"; };
+		59A44D4626E61BAA00D02AC6 /* Profiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiler.swift; sourceTree = "<group>"; };
+		59A44D4826E620D000D02AC6 /* HistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreen.swift; sourceTree = "<group>"; };
+		59A44D4A26E620D900D02AC6 /* HistoryScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScreenModel.swift; sourceTree = "<group>"; };
+		59A44D4C26E621E300D02AC6 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +179,10 @@
 			children = (
 				597BC57F26CFBFCD0035D69B /* HomeWork3.entitlements */,
 				597BC56F26CFAA940035D69B /* Support */,
+				59A44D3E26E6080400D02AC6 /* HistoryScreen */,
 				597BC56E26CFAA8F0035D69B /* SuffixScreen */,
 				597BC56D26CFAA760035D69B /* TextInputScreen */,
+				597BC57E26CFB8370035D69B /* TextView */,
 				5925AB0526CEA1DD002EC18E /* HomeWork3App.swift */,
 				5925AB0726CEA1DD002EC18E /* ContentView.swift */,
 				5925AB0926CEA1DE002EC18E /* Assets.xcassets */,
@@ -232,7 +248,7 @@
 		597BC56F26CFAA940035D69B /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				597BC57E26CFB8370035D69B /* TextView */,
+				59A44D4526E617BC00D02AC6 /* JobService */,
 				5925AB3026CEAAA5002EC18E /* StringSuffix.swift */,
 				5925AB4C26CEB327002EC18E /* WidgetService.swift */,
 				597BC57826CFB2850035D69B /* CustomPicker.swift */,
@@ -258,6 +274,27 @@
 				597BC59426CFC8BC0035D69B /* DataProvider.swift */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		59A44D3E26E6080400D02AC6 /* HistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				59A44D4826E620D000D02AC6 /* HistoryScreen.swift */,
+				59A44D4A26E620D900D02AC6 /* HistoryScreenModel.swift */,
+				59A44D4C26E621E300D02AC6 /* HistoryCell.swift */,
+			);
+			path = HistoryScreen;
+			sourceTree = "<group>";
+		};
+		59A44D4526E617BC00D02AC6 /* JobService */ = {
+			isa = PBXGroup;
+			children = (
+				59A44D3F26E6137C00D02AC6 /* JobScheduler.swift */,
+				59A44D4126E6138200D02AC6 /* Job.swift */,
+				59A44D4326E6138A00D02AC6 /* JobQueue.swift */,
+				59A44D4626E61BAA00D02AC6 /* Profiler.swift */,
+			);
+			path = JobService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,14 +457,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59A44D4926E620D000D02AC6 /* HistoryScreen.swift in Sources */,
 				597BC57926CFB2850035D69B /* CustomPicker.swift in Sources */,
 				5925AB0826CEA1DD002EC18E /* ContentView.swift in Sources */,
 				5925AB3126CEAAA5002EC18E /* StringSuffix.swift in Sources */,
 				597BC57126CFAAB70035D69B /* SuffixScreenModel.swift in Sources */,
 				597BC57D26CFB82D0035D69B /* TextViewRepresentable.swift in Sources */,
 				597BC57726CFAAD70035D69B /* SuffixScreen.swift in Sources */,
+				59A44D4B26E620D900D02AC6 /* HistoryScreenModel.swift in Sources */,
 				597BC57B26CFB7E40035D69B /* CTextView.swift in Sources */,
 				5925AB0626CEA1DD002EC18E /* HomeWork3App.swift in Sources */,
+				59A44D4226E6138200D02AC6 /* Job.swift in Sources */,
+				59A44D4726E61BAA00D02AC6 /* Profiler.swift in Sources */,
+				59A44D4D26E621E300D02AC6 /* HistoryCell.swift in Sources */,
+				59A44D4026E6137C00D02AC6 /* JobScheduler.swift in Sources */,
+				59A44D4426E6138A00D02AC6 /* JobQueue.swift in Sources */,
 				5925AB4D26CEB327002EC18E /* WidgetService.swift in Sources */,
 				597BC57526CFAACF0035D69B /* TextInputScreen.swift in Sources */,
 				597BC57326CFAAC40035D69B /* TextInputScreenModel.swift in Sources */,
