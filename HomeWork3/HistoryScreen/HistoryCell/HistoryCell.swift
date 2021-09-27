@@ -36,7 +36,7 @@ struct HistoryCell: View {
                     Text("Время теста:")
                         .bold()
                         .foregroundColor(.gray)
-                    Text(time == 0 ? "Тест не проводился" : String(describing: time))
+                    Text(time == 0 ? "Тест не проводился" : String(format: "%.2f ms", data.time * 1000))
                         .lineLimit(1)
                     Spacer()
                 }
@@ -54,9 +54,3 @@ struct HistoryCell: View {
     }
 }
 
-struct HistoryData {
-    let title   : String
-    
-    var index   : Int            = -1
-    var time    : TimeInterval   = 0
-}

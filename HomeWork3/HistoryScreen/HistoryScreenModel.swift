@@ -13,21 +13,21 @@ final class HistoryScreenModel: ObservableObject {
     var historyData     : [HistoryData]     = .init()
     var service         : JobScheduler<MeasureJob>       = .init()
     var cancellable     : AnyCancellable?
-    
+    var cacheService    : CacheService      = .init()
     var minimalIndex    : Int               = 0
     var maximumIndex    : Int               = 0
     
-    func loadHistoryData() {
-        guard let data = UserDefaults.standard.stringArray(forKey: "history_data") else {
-            historyData = []
-            return
-        }
+    func loadData() {
+        historyData = cacheService.loadDataFromFile()
         
-        guard historyData.count != data.count else { return }
-        
-        historyData = []
-        for item in data {
-            historyData.append(HistoryData(title: item))
+        for i in 0..<historyData.count {
+            if historyData[i].time < historyData[minimalIndex].time {
+                minimalIndex = i
+            }
+            
+            if historyData[i].time > historyData[maximumIndex].time {
+                maximumIndex = i
+            }
         }
     }
     
@@ -35,10 +35,10 @@ final class HistoryScreenModel: ObservableObject {
         guard historyData.count == 0 else { return }
         
         appendHistoryData()
-        
-        var historyArray: [String] = .init()
-        historyArray = historyData.map { $0.title }
-        UserDefaults.standard.set(historyArray, forKey: "history_data")
+    }
+    
+    func cacheData() {
+        cacheService.cacheToFile(data: historyData)
     }
 
     func runTest() {

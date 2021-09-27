@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject
-    var model: ContentViewModel = ContentViewModel()
+    var model   : ContentViewModel  = ContentViewModel()
+    var service : CoreDataService   = CoreDataService()
     
     var body: some View {
         TabView(selection: $model.tabSelection) {
@@ -29,13 +30,23 @@ struct ContentView: View {
                 .tabItem{
                     Text("История")
                 }
+            
+            CacheScreen(model: model.cacheScreenModel)
+                .tag(3)
+                .tabItem{
+                    Text("Кэш")
+                }
         }
         .onAppear {
             model.selectScreen()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
             model.selectScreen()
-        }.onOpenURL(perform: { url in
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            service.saveContext()
+        }
+        .onOpenURL(perform: { url in
             if url.absoluteString == "test_url" {
                 model.tabSelection = 0
             } else {
@@ -46,14 +57,13 @@ struct ContentView: View {
 }
 
 final class ContentViewModel: ObservableObject {
-    let textInputScrennModel = TextInputScreenModel()
-    let suffixScreenModel = SuffixScreenModel()
-    let historyScreenModel = HistoryScreenModel()
+    let textInputScrennModel: TextInputScreenModel  = .init()
+    let suffixScreenModel   : SuffixScreenModel     = .init()
+    let historyScreenModel  : HistoryScreenModel    = .init()
+    let cacheScreenModel    : CacheScreenModel      = .init()
     
     @Published
     var tabSelection: Int = 0
     
-    func selectScreen() {
-        
-    }
+    func selectScreen() { }
 }

@@ -29,7 +29,10 @@ struct HistoryScreen: View {
         }
         .frame(width: UIScreen.main.bounds.width)
         .onAppear {
-            model.loadHistoryData()
+            model.loadData()
+        }
+        .onDisappear {
+            model.cacheData()
         }
     }
     
